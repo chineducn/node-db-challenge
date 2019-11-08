@@ -9,14 +9,25 @@ exports.up = function(knex) {
                 .string('name')
                 .notNullable();
             tbl
-                .string('description')
+                .string('description');
             tbl
                 .boolean('completed')
                 .notNullable()
-                .defaultTo(0)
+                .defaultTo(0);
         })
-        .createTable()
-        .createTable()
+        .createTable('resource', tbl => {
+            tbl
+                .increments();
+            tbl
+                .string('name')
+                .notNullable();
+            tbl
+                .string('description');
+
+        })
+        .createTable('task', tbl => {
+            
+        })
         .createTable()
 };
 
