@@ -28,4 +28,36 @@ router.get('/', (req, res) => {
         })
 })
 
+router.get('/:id', (req, res) => {
+    db.getProjectById(req.params.id)
+        .then(project => {
+            res
+                .status(200)
+                .json(project)
+        })
+        .catch(error => {
+            res
+                .status(500)
+                .json({
+                    message: `There was an error getting the project, ${error}`
+                })
+        })
+})
+
+router.post('/', (req, res) => {
+    db.addProject(req.body)
+        .then(newProject => {
+            res
+                .status(201)
+                .json(newProject)
+        })
+        .catch(error => {
+            res
+                .status(500)
+                .json({
+                    message: `There was an error adding the project, ${error}`
+                })
+        })
+})
+
 module.exports = router
