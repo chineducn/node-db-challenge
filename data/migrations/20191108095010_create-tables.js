@@ -26,9 +26,25 @@ exports.up = function(knex) {
 
         })
         .createTable('task', tbl => {
-            
+            tbl
+                .increments();
+            tbl
+                .string('description')
+                .notNullable();
+            tbl
+                .string('notes');
+            tbl
+                .integer('project_id')
+                .unsigned()
+                .notNullable()
+                .references('id')
+                .inTable('project');
+            tbl
+                .boolean('completed')
+                .notNullable()
+                .defaultTo(0);
         })
-        .createTable()
+        .createTable('project_resource', )
 };
 
 exports.down = function(knex) {
