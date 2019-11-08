@@ -60,4 +60,29 @@ router.post('/', (req, res) => {
         })
 })
 
+router.get('/:id/tasks', (req, res) => {
+    db.getProjectTasks(req.params.id)
+        .then(tasks => {
+            if (tasks.length) {
+                res
+                    .status(200)
+                    .json(tasks)
+            }
+            else {
+                res
+                    .status(404)
+                    .json({
+                        message: `There are no saved tasks`
+                    })
+            }
+        })
+        .catch(error => {
+            res
+                .status(500)
+                .json({
+                    message: `There was an error getting the tasks, ${error}`
+                })
+        })
+})
+
 module.exports = router
