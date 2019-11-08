@@ -10,4 +10,6 @@ module.exports = {
     getResourceById: resource.getResourceById,
     addResource: resource.addResource,
     getProjectTasks: task.getProjectTasks,
+    getTaskById: task.getTaskById,
+    addTask: task.addTask,
 }

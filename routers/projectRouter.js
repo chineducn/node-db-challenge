@@ -85,4 +85,37 @@ router.get('/:id/tasks', (req, res) => {
         })
 })
 
+router.get('/:id/tasks/:task_id', (req, res) => {
+    db.getTaskById(req.params.task_id)
+        .then(task => {
+            res
+                .status(200)
+                .json(task)
+        })
+        .catch(error => {
+            res
+                .status(500)
+                .json({
+                    message: `There was an error getting the task, ${error}`
+                })
+        })
+})
+
+router.post('/:id/tasks', (req, res) => {
+    const taskDetails = { ...req.body, project_id: req.params.id }
+    db.addTask(taskDetails)
+        .then(newTask => {
+            res
+                .status(201)
+                .json(newTask)
+        })
+        .catch(error => {
+            res
+                .status(500)
+                .json({
+                    message: `There was an error adding the task, ${error}`
+                })
+        })
+})
+
 module.exports = router
